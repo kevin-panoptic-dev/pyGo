@@ -80,14 +80,6 @@ def help_screen(
 WIN = set_window()
 CLOCK = set_clock()
 
-# while True:
-#     CLOCK.tick(60)
-#     for event in pygame.event.get():
-#         if event.type == pygame.QUIT:
-#             terminate()
-
-#     open_screen(WIN, ((200, 100, 300, 100), (500, 500, 10, 100)))
-
 
 def open_event(window: pygame.Surface, clock: Clock):
     process = True
@@ -131,6 +123,3 @@ def help_event(window: pygame.Surface, clock: Clock):
         help_screen(window, second_label_position)
     if call_open:
         open_event(window, clock)
-
-
-open_event(WIN, CLOCK)
