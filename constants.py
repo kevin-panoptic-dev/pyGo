@@ -41,3 +41,18 @@ def set_window() -> pygame.Surface:
 
 def set_clock() -> Clock:
     return pygame.time.Clock()
+
+
+# label constants
+first_label_position: tuple[float, float, float, float] = (
+    screen_size[0] / 4,
+    screen_size[1] * 3 / 4,
+    150.0,
+    50.0,
+)
+second_label_position: tuple[float, float, float, float] = (
+    screen_size[0] * 3 / 4,
+    screen_size[1] * 3 / 4,
+    150.0,
+    50.0,
+)
