@@ -25,6 +25,7 @@ font: Font = pygame.font.SysFont("comicsans", 50)
 button_font: Font = pygame.font.SysFont("comicsans", 35)
 font_color: tuple[Literal[0], Literal[0], Literal[0]] = 0, 0, 0
 button_color: tuple[Literal[255], Literal[0], Literal[0]] = 255, 0, 0
+message_font = pygame.font.SysFont("comiscans", 25)
 
 
 def terminate() -> NoReturn:
@@ -55,4 +56,18 @@ second_label_position: tuple[float, float, float, float] = (
     screen_size[1] * 3 / 4,
     150.0,
     50.0,
+)
+
+
+middle_label_position: tuple[Literal[100], Literal[400], Literal[600], Literal[200]] = (
+    100,
+    400,
+    600,
+    200,
+)
+confirm_label_position: tuple[Literal[350], Literal[530], Literal[100], Literal[50]] = (
+    350,
+    530,
+    100,
+    50,
 )

@@ -30,7 +30,7 @@ class interphase(metaclass=metaclarion):
         player: Literal["black", "white"],
         button_positions: tuple[tuple, tuple],
     ):
-        label = title.render(f"{player} wins!", 1, (0, 0, 255))
+        label: pygame.Surface = title.render(f"{player} wins!", 1, (0, 0, 255))
         window.fill(background_color)
         window.blit(label, (int(screen_size[0] / 2 - label.get_width() / 2), 300))
         cls.create_button(window, "restart", button_positions[0])
