@@ -8,6 +8,8 @@ from constants import (
     terminate,
     FPS,
     set_window,
+    resign_button_position,
+    font,
 )
 from pymodule import metaclarion, circulis
 from pymodule.utility import prismelt
@@ -54,7 +56,7 @@ class interface(metaclass=metaclarion):
     def warning_screen(
         cls,
         window: pygame.Surface,
-        warning_type: Literal["suicide", "arrogate", "downfall"],
+        warning_type: Literal["suicide", "arrogate", "downfall", "resign"],
     ) -> None:
         if warning_type == "suicide":
             message = (
@@ -64,6 +66,8 @@ class interface(metaclass=metaclarion):
             message = "Cannot place the stone above another stone"
         elif warning_type == "downfall":
             message = "Place the stone outside the boundary is invalid"
+        elif warning_type == "resign":
+            message = "Are you sure to resign?"
 
         background = window.copy()
         window.blit(background, (0, 0))
@@ -76,7 +80,7 @@ class interface(metaclass=metaclarion):
         cls,
         window: pygame.Surface,
         clock: Clock,
-        warning_type: Literal["suicide", "arrogate", "downfall"],
+        warning_type: Literal["suicide", "arrogate", "downfall", "resign"],
     ):
         process = True
         while process:
@@ -89,9 +93,19 @@ class interface(metaclass=metaclarion):
                     if cls.dentro(mouse_position, confirm_label_position):
                         process = False
             cls.warning_screen(window, warning_type)
-        ...  # return to main loop
+
+        return "resign" if warning_type == "resign" else "continue"
+
+    @classmethod
+    def add_resign(cls, window: pygame.Surface):
+        cls.raise_warning(window, "resign", resign_button_position, (255, 0, 0))
+
+    @classmethod
+    def player_bar(cls, window: pygame.Surface, player: Literal["black", "white"]):
+        message = font.render(f"{player}'s turn!", 1, font_color)
+        window.blit(message, (300, 900))
 
 
-WIN = set_window()
-clock = set_clock()
-interface.warning_event(WIN, clock, "suicide")
+# WIN = set_window()
+# clock = set_clock()
+# interface.warning_event(WIN, clock, "suicide")

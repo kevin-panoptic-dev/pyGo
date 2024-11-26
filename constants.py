@@ -9,7 +9,7 @@ from pymodule.utility import prismelt
 pygame.font.init()
 
 # width, height
-screen_size: tuple[Literal[800], Literal[800]] = 800, 800
+screen_size: tuple[Literal[800], Literal[1000]] = 800, 1000
 
 # 19 vertical lines, 19 horizontal lines, 40 margin left + 18 • 40 middle + 40 margin right
 horizontal_line_position: circulis = circulis((x for x in range(40, 761, 40)))
@@ -68,6 +68,12 @@ middle_label_position: tuple[Literal[100], Literal[400], Literal[600], Literal[2
 confirm_label_position: tuple[Literal[350], Literal[530], Literal[100], Literal[50]] = (
     350,
     530,
+    100,
+    50,
+)
+resign_button_position: tuple[Literal[600], Literal[900], Literal[100], Literal[50]] = (
+    600,
+    900,
     100,
     50,
 )
