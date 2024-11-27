@@ -1,5 +1,6 @@
 from pymodule import circulis
 from typing import Literal, Self
+from pymodule.utility import prismelt
 
 
 class algorithm:
@@ -33,7 +34,7 @@ class algorithm:
         cohort: circulis = circulis([])
         waiting: list[tuple[int, int]] = [(x, y)]
         liberties = 0
-
+        self.board[x][y] = player
         while waiting:
             x, y = waiting.pop()
             if (x, y) in visited:
@@ -65,7 +66,7 @@ class algorithm:
             else:
                 result: circulis = self.__switch(x, y, "black")
 
-            if result.empty:
+            if not result.empty:
                 # switch to check enemy condition: the stone is not suicide by removing the enemies.
                 return (False, result)
 
@@ -133,6 +134,11 @@ class algorithm:
 
     def __iadd__(self, stone: tuple[int, int, Literal["white", "black"]]):
         self.board[stone[0]][stone[1]] = stone[2]
+        # prismelt(
+        #     f"{stone[0]=}, {stone[1]=}", color=(255, 0, 0)
+        # )  # x position, y position
+        # prismelt(self.board[2][1], color=(0, 255, 0))  # x=2, y=1
+        # prismelt(self.board[1][2], color=(0, 0, 255))  # x=1, y=2
         return self
 
     @property
