@@ -134,12 +134,13 @@ class algorithm:
 
     def __iadd__(self, stone: tuple[int, int, Literal["white", "black"]]):
         self.board[stone[0]][stone[1]] = stone[2]
-        # prismelt(
-        #     f"{stone[0]=}, {stone[1]=}", color=(255, 0, 0)
-        # )  # x position, y position
-        # prismelt(self.board[2][1], color=(0, 255, 0))  # x=2, y=1
-        # prismelt(self.board[1][2], color=(0, 0, 255))  # x=1, y=2
         return self
+
+    def __isub__(self, stone: tuple[int, int, Literal["white", "black"]]):
+        if self.board[stone[0]][stone[1]] == stone[2]:
+            self.board[stone[0]][stone[1]] = "empty"
+            return self
+        raise ValueError("Invalid suicide remove")
 
     @property
     def circulist(self) -> circulis:

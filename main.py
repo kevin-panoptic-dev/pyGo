@@ -51,6 +51,8 @@ def place_stone(
     ) = board.main(x, y, player)
     if result != "success":
         interface.warning_event(window, clock, result)
+        if result == "suicide":
+            board -= (x, y, player)
         return False
 
     board += (x, y, player)
