@@ -103,9 +103,4 @@ class interface(metaclass=metaclarion):
     @classmethod
     def player_bar(cls, window: pygame.Surface, player: Literal["black", "white"]):
         message = font.render(f"{player}'s turn!", 1, font_color)
-        window.blit(message, (300, 900))
-
-
-# WIN = set_window()
-# clock = set_clock()
-# interface.warning_event(WIN, clock, "suicide")
+        window.blit(message, (100, 800))

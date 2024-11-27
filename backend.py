@@ -1,8 +1,8 @@
-from pymodule import circulis, metaclarion
+from pymodule import circulis
 from typing import Literal, Self
 
 
-class algorithm(metaclass=metaclarion):
+class algorithm:
     def __init__(self, size: int, *args, **kwargs) -> None:
         self.board: circulis = circulis(
             ["empty" for _ in range(size)] for _ in range(size)
@@ -30,7 +30,7 @@ class algorithm(metaclass=metaclarion):
         self, x: int, y: int, player: Literal["black", "white"]
     ) -> tuple[int, circulis]:
         visited: set = set()
-        cohort: circulis = circulis()
+        cohort: circulis = circulis([])
         waiting: list[tuple[int, int]] = [(x, y)]
         liberties = 0
 
@@ -110,15 +110,14 @@ class algorithm(metaclass=metaclarion):
             y (int): y coordinate
             player: "black" | "white: player
         """
-        if not self.__is_vacant(x, y):
-            return "arrogate"
         if self.__is_downfall(x, y):
             return "downfall"
+        if not self.__is_vacant(x, y):
+            return "arrogate"
         suicide, removable_enemies = self.__suicide(x, y, player)
         if suicide:
             return "suicide"
 
-        self.board[x][y] = player
         if removable_enemies is not None:
             self.__remove_group(removable_enemies)
             return "success"
@@ -131,3 +130,11 @@ class algorithm(metaclass=metaclarion):
             self.__remove_group(removable_enemies)
 
         return "success"
+
+    def __iadd__(self, stone: tuple[int, int, Literal["white", "black"]]):
+        self.board[stone[0]][stone[1]] = stone[2]
+        return self
+
+    @property
+    def circulist(self) -> circulis:
+        return self.board

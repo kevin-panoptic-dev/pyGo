@@ -19,13 +19,14 @@ vertical_line_position: circulis = horizontal_line_position[:]
 # design constants
 FPS: Literal[60] = 60
 background_color: tuple[Literal[205], Literal[192], Literal[190]] = 205, 192, 190
-line_thickness: Literal[10] = 10
 title: Font = pygame.font.SysFont("comiscans", 100)
 font: Font = pygame.font.SysFont("comicsans", 50)
 button_font: Font = pygame.font.SysFont("comicsans", 35)
 font_color: tuple[Literal[0], Literal[0], Literal[0]] = 0, 0, 0
 button_color: tuple[Literal[255], Literal[0], Literal[0]] = 255, 0, 0
 message_font = pygame.font.SysFont("comiscans", 25)
+interim: Literal[11] = 11
+distance = 41.5
 
 
 def terminate() -> NoReturn:
@@ -71,9 +72,9 @@ confirm_label_position: tuple[Literal[350], Literal[530], Literal[100], Literal[
     100,
     50,
 )
-resign_button_position: tuple[Literal[600], Literal[900], Literal[100], Literal[50]] = (
+resign_button_position: tuple[Literal[600], Literal[850], Literal[100], Literal[50]] = (
     600,
-    900,
+    850,
     100,
     50,
 )
