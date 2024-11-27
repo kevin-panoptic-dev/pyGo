@@ -1,6 +1,5 @@
 import pygame, os
 from pygame.time import Clock
-from pymodule import circulis
 from interface import interface
 from interphase import interphase
 from constants import (
@@ -14,7 +13,6 @@ from constants import (
     distance,
     resign_button_position,
 )
-from pymodule.utility import prismelt
 from backend import algorithm
 from typing import Literal
 
@@ -75,7 +73,7 @@ def render_images(
     background: pygame.Surface,
     white_stone: pygame.Surface,
     black_stone: pygame.Surface,
-    board: circulis,
+    board: list,
     player: Literal["black", "white"],
 ):
     window.fill(background_color)
@@ -151,9 +149,7 @@ def game_event(
                         else:
                             player = "black"
 
-        render_images(
-            window, BACKGROUND, WHITE_STONE, BLACK_STONE, board.circulist, player
-        )
+        render_images(window, BACKGROUND, WHITE_STONE, BLACK_STONE, board.get, player)
 
 
 def loop(window: pygame.Surface, clock: Clock, board: algorithm):

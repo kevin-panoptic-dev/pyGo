@@ -1,11 +1,9 @@
-from pymodule import circulis
-from typing import Literal, Self
-from pymodule.utility import prismelt
+from typing import Literal
 
 
 class algorithm:
-    def __init__(self, size: int, *args, **kwargs) -> None:
-        self.board: circulis = circulis(
+    def __init__(self, size: int) -> None:
+        self.board: list[list[str]] = list(
             ["empty" for _ in range(size)] for _ in range(size)
         )
         self.size: int = size
@@ -16,22 +14,22 @@ class algorithm:
     def __is_downfall(self, x: int, y: int) -> bool:
         return not (0 <= x < self.size) or not (0 <= y < self.size)
 
-    def __adjacent(self, x: int, y: int) -> circulis:
-        return circulis(
+    def __adjacent(self, x: int, y: int) -> list:
+        return list(
             (x + appendage_x, y + appendage_y)
             for appendage_x, appendage_y in [(-1, 0), (1, 0), (0, -1), (0, 1)]
             if not self.__is_downfall(x + appendage_x, y + appendage_y)
         )
 
-    def __remove_group(self, group: circulis) -> None:
+    def __remove_group(self, group: list) -> None:
         for x, y in group:
             self.board[x][y] = "empty"
 
     def __cohort(
         self, x: int, y: int, player: Literal["black", "white"]
-    ) -> tuple[int, circulis]:
+    ) -> tuple[int, list]:
         visited: set = set()
-        cohort: circulis = circulis([])
+        cohort: list = []
         waiting: list[tuple[int, int]] = [(x, y)]
         liberties = 0
         self.board[x][y] = player
@@ -53,7 +51,7 @@ class algorithm:
         self, x: int, y: int, player: Literal["black", "white"]
     ) -> (
         tuple[Literal[False], None]
-        | tuple[Literal[False], circulis]
+        | tuple[Literal[False], list]
         | tuple[Literal[True], None]
     ):
         liberties, _ = self.__cohort(x, y, player)
@@ -62,11 +60,11 @@ class algorithm:
             return (False, None)
         else:
             if player == "black":
-                result: circulis = self.__switch(x, y, "white")
+                result: list = self.__switch(x, y, "white")
             else:
-                result: circulis = self.__switch(x, y, "black")
+                result: list = self.__switch(x, y, "black")
 
-            if not result.empty:
+            if len(result):
                 # switch to check enemy condition: the stone is not suicide by removing the enemies.
                 return (False, result)
 
@@ -75,14 +73,14 @@ class algorithm:
 
     def __switch(
         self, this_x: int, this_y: int, enemy: Literal["black", "white"]
-    ) -> circulis:
-        danger_enemies: circulis = circulis([])
+    ) -> list:
+        danger_enemies: list = []
         for enemy_x, enemy_y in self.__adjacent(this_x, this_y):
             if self.board[enemy_x][enemy_y] != enemy:
                 continue
             liberties, group = self.__cohort(enemy_x, enemy_y, enemy)
             if not liberties:
-                danger_enemies.append(group, unpack=True)
+                danger_enemies.extend(group)
 
         return danger_enemies
 
@@ -127,7 +125,7 @@ class algorithm:
             removable_enemies = self.__switch(x, y, "white")
         else:
             removable_enemies = self.__switch(x, y, "black")
-        if not removable_enemies.empty:
+        if len(removable_enemies):
             self.__remove_group(removable_enemies)
 
         return "success"
@@ -143,11 +141,9 @@ class algorithm:
         raise ValueError("Invalid suicide remove")
 
     @property
-    def circulist(self) -> circulis:
+    def get(self) -> list:
         return self.board
 
     @property
     def restart(self) -> None:
-        self.board = circulis(
-            ["empty" for _ in range(self.size)] for _ in range(self.size)
-        )
+        self.board = list(["empty" for _ in range(self.size)] for _ in range(self.size))

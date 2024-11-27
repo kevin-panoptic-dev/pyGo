@@ -3,18 +3,11 @@ import sys
 from typing import Literal, NoReturn
 from pygame.font import Font
 from pygame.time import Clock
-from pymodule import circulis
-from pymodule.utility import prismelt
 
 pygame.font.init()
 
 # width, height
 screen_size: tuple[Literal[800], Literal[1000]] = 800, 1000
-
-# 19 vertical lines, 19 horizontal lines, 40 margin left + 18 • 40 middle + 40 margin right
-horizontal_line_position: circulis = circulis((x for x in range(40, 761, 40)))
-vertical_line_position: circulis = horizontal_line_position[:]
-
 
 # design constants
 FPS: Literal[60] = 60

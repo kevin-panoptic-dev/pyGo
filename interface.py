@@ -1,24 +1,19 @@
 from constants import (
-    background_color,
     message_font,
     middle_label_position,
     confirm_label_position,
     font_color,
-    set_clock,
     terminate,
     FPS,
-    set_window,
     resign_button_position,
     font,
 )
-from pymodule import metaclarion, circulis
-from pymodule.utility import prismelt
 import pygame
 from pygame.time import Clock
 from typing import Literal
 
 
-class interface(metaclass=metaclarion):
+class interface:
     @classmethod
     def raise_warning(
         cls,

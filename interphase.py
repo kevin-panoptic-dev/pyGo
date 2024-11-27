@@ -13,11 +13,10 @@ from constants import (
     second_label_position,
 )
 from pygame.time import Clock
-from pymodule import metaclarion
 from typing import Literal
 
 
-class interphase(metaclass=metaclarion):
+class interphase:
     @classmethod
     def close_screen(
         cls,
