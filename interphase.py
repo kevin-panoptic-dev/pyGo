@@ -8,8 +8,6 @@ from constants import (
     button_font,
     button_color,
     screen_size,
-    set_window,
-    set_clock,
     terminate,
     first_label_position,
     second_label_position,
@@ -17,9 +15,6 @@ from constants import (
 from pygame.time import Clock
 from pymodule import metaclarion
 from typing import Literal
-
-WIN: pygame.Surface = set_window()
-CLOCK: Clock = set_clock()
 
 
 class interphase(metaclass=metaclarion):

@@ -145,3 +145,9 @@ class algorithm:
     @property
     def circulist(self) -> circulis:
         return self.board
+
+    @property
+    def restart(self) -> None:
+        self.board = circulis(
+            ["empty" for _ in range(self.size)] for _ in range(self.size)
+        )

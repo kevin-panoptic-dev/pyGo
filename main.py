@@ -12,6 +12,7 @@ from constants import (
     interim,
     screen_size,
     distance,
+    resign_button_position,
 )
 from pymodule.utility import prismelt
 from backend import algorithm
@@ -106,21 +107,42 @@ def render_images(
     pygame.display.update()
 
 
+def dentro(  # inside
+    mouse_position: tuple[int, int],
+    button_position: tuple[float, float, float, float],
+) -> bool:
+    if (
+        button_position[0]
+        < mouse_position[0]
+        < (button_position[0] + button_position[2])
+    ) and (
+        button_position[1]
+        < mouse_position[1]
+        < (button_position[1] + button_position[3])
+    ):
+        return True
+    return False
+
+
 def game_event(
     window: pygame.Surface,
     clock: Clock,
     turn: Literal["black", "white"],
     board: algorithm,
 ):
-    process = True
     player: Literal["black"] | Literal["white"] = turn
-    while process:
+    while True:
         clock.tick(FPS)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 terminate()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_position = pygame.mouse.get_pos()
+                if dentro(mouse_position, resign_button_position):
+                    if interface.warning_event(window, clock, "resign") == "resign":
+                        if player == "black":
+                            return "white"
+                        return "black"
                 abstract_position = convert_to_coordinate(mouse_position)
                 if abstract_position is not None:
                     if place_stone(window, clock, *abstract_position, board, player):
@@ -135,13 +157,17 @@ def game_event(
 
 
 def loop(window: pygame.Surface, clock: Clock, board: algorithm):
-    start = True
-    turn: Literal["black", "white"] = "black"
-    winner: Literal["black", "white"] = "black"
-    while start:
-        interphase.open_event(window, clock)
-        game_event(window, clock, turn, board)
-        start = interphase.close_event(window, clock, winner)
+    restart = False
+    while True:
+        if not restart:
+            interphase.open_event(window, clock)
+        winner = game_event(window, clock, "black", board)
+        restart = interphase.close_event(window, clock, winner)
+        board.restart
+        if restart == "start":
+            restart = True
+            continue
+        restart = False
 
 
 loop(WIN, CLOCK, BOARD)
