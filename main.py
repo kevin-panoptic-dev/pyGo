@@ -58,14 +58,24 @@ def place_stone(
     return True
 
 
-def convert_to_coordinate(mouse_position: tuple[int, int]):
+def ambiguous(mouse_position: tuple[int, int]):
     if not (interim <= mouse_position[0] <= 800 - interim) or not (
         interim <= mouse_position[1] <= 800 - interim
-    ):  # out of border, ignore
-        return None
+    ):  # out of border, ambiguous
+        return True
+    if (
+        1 / 4 * distance < (mouse_position[0] - interim) % distance < 3 / 4 * distance
+    ) or (
+        1 / 4 * distance < (mouse_position[1] - interim) % distance < 3 / 4 * distance
+    ):
+        return True  # middle of the tile, ambiguous
+    return False
 
-    converter = lambda position: round((position - interim) / distance)
-    return converter(mouse_position[0]), converter(mouse_position[1])
+
+def convert_to_coordinate(mouse_position: tuple[int, int]):
+    if not ambiguous(mouse_position):
+        converter = lambda position: round((position - interim) / distance)
+        return converter(mouse_position[0]), converter(mouse_position[1])
 
 
 def render_images(
@@ -136,6 +146,8 @@ def game_event(
                 terminate()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_position = pygame.mouse.get_pos()
+                # adjust the real mouse position
+                mouse_position = (mouse_position[0] - 15, mouse_position[1] - 15)
                 if dentro(mouse_position, resign_button_position):
                     if interface.warning_event(window, clock, "resign") == "resign":
                         if player == "black":
