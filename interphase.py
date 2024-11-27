@@ -6,7 +6,6 @@ from constants import (
     title,
     background_color,
     button_font,
-    button_color,
     screen_size,
     terminate,
     first_label_position,
@@ -27,8 +26,8 @@ class interphase:
         label: pygame.Surface = title.render(f"{player} wins!", 1, (0, 0, 255))
         window.fill(background_color)
         window.blit(label, (int(screen_size[0] / 2 - label.get_width() / 2), 300))
-        cls.create_button(window, "restart", button_positions[0])
-        cls.create_button(window, "exit", button_positions[1])
+        cls.create_button(window, "restart", button_positions[0], (248, 215, 123))
+        cls.create_button(window, "exit", button_positions[1], (248, 215, 123))
         pygame.display.update()
 
     @classmethod
@@ -37,12 +36,13 @@ class interphase:
         window: pygame.Surface,
         text: str,
         size: tuple[float, float, float, float],
+        color: tuple[int, int, int],
     ) -> None:
         button = pygame.Rect(*size)
         label: pygame.Surface = button_font.render(text, 1, font_color)
         font_x = int(size[0] + size[2] / 2 - label.get_width() / 2)
         font_y = int(size[1] + size[3] / 2 - label.get_height() / 2)
-        pygame.draw.rect(window, button_color, button, border_radius=5)
+        pygame.draw.rect(window, color, button, border_radius=5)
         window.blit(label, (font_x, font_y))
 
     @classmethod
@@ -84,8 +84,8 @@ class interphase:
                 int(screen_size[1] / 2 + description.get_height()),
             ),
         )
-        cls.create_button(window, "Start", button_positions[0])
-        cls.create_button(window, "Help", button_positions[1])
+        cls.create_button(window, "Start", button_positions[0], (161, 227, 168))
+        cls.create_button(window, "Help", button_positions[1], (150, 217, 223))
         pygame.display.update()
 
     @classmethod
@@ -93,7 +93,7 @@ class interphase:
         cls, window: pygame.Surface, button_position: tuple[float, float, float, float]
     ) -> None:
         window.fill(background_color)
-        cls.create_button(window, "return", button_position)
+        cls.create_button(window, "return", button_position, (103, 193, 202))
         pygame.display.update()
 
     @classmethod

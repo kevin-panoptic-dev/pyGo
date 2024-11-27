@@ -7,7 +7,7 @@ from pygame.time import Clock
 pygame.font.init()
 
 # width, height
-screen_size: tuple[Literal[800], Literal[1000]] = 800, 1000
+screen_size: tuple[Literal[800], Literal[900]] = 800, 900
 
 # design constants
 FPS: Literal[60] = 60
@@ -15,9 +15,8 @@ background_color: tuple[Literal[205], Literal[192], Literal[190]] = 205, 192, 19
 title: Font = pygame.font.SysFont("comiscans", 100)
 font: Font = pygame.font.SysFont("comicsans", 50)
 button_font: Font = pygame.font.SysFont("comicsans", 35)
-font_color: tuple[Literal[0], Literal[0], Literal[0]] = 0, 0, 0
-button_color: tuple[Literal[255], Literal[0], Literal[0]] = 255, 0, 0
-message_font = pygame.font.SysFont("comiscans", 25)
+font_color = 61, 61, 61
+message_font = pygame.font.SysFont("comicsans", 33)
 interim: Literal[11] = 11
 distance = 41.5
 
@@ -39,24 +38,24 @@ def set_clock() -> Clock:
 
 
 # label constants
-first_label_position: tuple[float, float, float, float] = (
-    screen_size[0] / 4,
-    screen_size[1] * 3 / 4,
-    150.0,
-    50.0,
-)
-second_label_position: tuple[float, float, float, float] = (
-    screen_size[0] * 3 / 4,
-    screen_size[1] * 3 / 4,
-    150.0,
-    50.0,
-)
-
-
-middle_label_position: tuple[Literal[100], Literal[400], Literal[600], Literal[200]] = (
+first_label_position: tuple[Literal[100], Literal[700], Literal[150], Literal[50]] = (
     100,
-    400,
-    600,
+    700,
+    150,
+    50,
+)
+second_label_position: tuple[Literal[550], Literal[700], Literal[150], Literal[50]] = (
+    550,
+    700,
+    150,
+    50,
+)
+
+
+middle_label_position = (
+    150,
+    300,
+    500,
     200,
 )
 confirm_label_position: tuple[Literal[350], Literal[530], Literal[100], Literal[50]] = (
@@ -65,9 +64,9 @@ confirm_label_position: tuple[Literal[350], Literal[530], Literal[100], Literal[
     100,
     50,
 )
-resign_button_position: tuple[Literal[600], Literal[850], Literal[100], Literal[50]] = (
-    600,
-    850,
-    100,
+resign_button_position: tuple[Literal[550], Literal[825], Literal[150], Literal[50]] = (
+    550,
+    825,
+    150,
     50,
 )
