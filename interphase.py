@@ -10,15 +10,41 @@ from constants import (
     terminate,
     first_label_position,
     second_label_position,
+    text_font,
 )
 from pygame.time import Clock
 from typing import Literal
 
 GO = pygame.image.load(os.path.join("assets", "Go.png"))
 GO = pygame.transform.scale(GO, (400, 200))
+help_text = [
+    "Go, a timeless strategy game, is played on a grid of 19x19, ",
+    "13x13, or 9x9 intersections. Two players, Black and White, ",
+    "alternate placing stones to claim territory, aiming to surround",
+    "empty spaces and capture opposing stones by encircling them. ",
+    "",
+    "Stones with no liberties (empty adjacent points) are removed. ",
+    "The game concludes when both players pass consecutively, signaling",
+    "no beneficial moves remain. Scores are tallied by counting",
+    "controlled territory and captured stones, with White receiving",
+    "a point advantage for balance. Strategy emphasizes balance between",
+    "offense and defense, requiring foresight, adaptability, and ",
+    "precision. Go embodies elegance through its simple rules yet ",
+    "profound depth.",
+]
+text_y = [x * 50 for x in range(1, len(help_text) + 1)]
+text_x = 20
 
 
 class interphase:
+    @classmethod
+    def render_text(cls, window: pygame.Surface):
+        index = 0
+        for text in help_text:
+            text = text_font.render(text, 1, (0, 0, 0))
+            window.blit(text, (text_x, text_y[index]))
+            index += 1
+
     @classmethod
     def close_screen(
         cls,
@@ -26,9 +52,9 @@ class interphase:
         player: Literal["black", "white"],
         button_positions: tuple[tuple, tuple],
     ):
-        label: pygame.Surface = title.render(f"{player} wins!", 1, (0, 0, 255))
+        label: pygame.Surface = title.render(f"{player} wins!", 1, (255, 223, 98))
         window.fill(background_color)
-        window.blit(label, (int(screen_size[0] / 2 - label.get_width() / 2), 300))
+        window.blit(label, (int(screen_size[0] / 2 - label.get_width() / 2), 400))
         cls.create_button(window, "restart", button_positions[0], (248, 215, 123))
         cls.create_button(window, "exit", button_positions[1], (248, 215, 123))
         pygame.display.update()
@@ -95,6 +121,7 @@ class interphase:
         cls, window: pygame.Surface, button_position: tuple[float, float, float, float]
     ) -> None:
         window.fill(background_color)
+        cls.render_text(window)
         cls.create_button(window, "return", button_position, (103, 193, 202))
         pygame.display.update()
 

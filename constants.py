@@ -17,6 +17,7 @@ font: Font = pygame.font.SysFont("comicsans", 50)
 button_font: Font = pygame.font.SysFont("comicsans", 35)
 font_color = 61, 61, 61
 message_font = pygame.font.SysFont("comicsans", 33)
+text_font = pygame.font.SysFont("comicsans", 24)
 interim: Literal[11] = 11
 distance = 41.5
 

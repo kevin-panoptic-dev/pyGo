@@ -9,7 +9,6 @@ from constants import (
     FPS,
     terminate,
     interim,
-    screen_size,
     distance,
     resign_button_position,
 )

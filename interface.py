@@ -95,5 +95,5 @@ class interface:
 
     @classmethod
     def player_bar(cls, window: pygame.Surface, player: Literal["black", "white"]):
-        message = font.render(f"{player}'s turn!", 1, font_color)
+        message = font.render(f"{player} move!", 1, font_color)
         window.blit(message, (100, 800))
