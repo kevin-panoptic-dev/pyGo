@@ -9,7 +9,7 @@ A simple implementation of the Go board game using Python and Pygame, ideal for 
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/project-name.git
+   git clone https://github.com/kevin-panoptic-dev/pyGo.git
 
 2. Install pygame
     ```bash
