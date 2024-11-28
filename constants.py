@@ -71,3 +71,5 @@ resign_button_position: tuple[Literal[550], Literal[825], Literal[150], Literal[
     150,
     50,
 )
+
+# Thanks for scrolling 😊

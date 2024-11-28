@@ -178,3 +178,7 @@ def loop(window: pygame.Surface, clock: Clock, board: algorithm):
 
 
 loop(WIN, CLOCK, BOARD)
+
+
+
+# Thanks for scrolling 😊
