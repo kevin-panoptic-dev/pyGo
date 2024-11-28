@@ -147,3 +147,6 @@ class algorithm:
     @property
     def restart(self) -> None:
         self.board = list(["empty" for _ in range(self.size)] for _ in range(self.size))
+
+
+# Thanks for scrolling 😊
