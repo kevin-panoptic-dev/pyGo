@@ -1,4 +1,4 @@
-import pygame
+import pygame, os
 from constants import (
     FPS,
     font,
@@ -13,6 +13,9 @@ from constants import (
 )
 from pygame.time import Clock
 from typing import Literal
+
+GO = pygame.image.load(os.path.join("assets", "Go.png"))
+GO = pygame.transform.scale(GO, (400, 200))
 
 
 class interphase:
@@ -65,17 +68,16 @@ class interphase:
 
     @classmethod
     def open_screen(cls, window: pygame.Surface, button_positions: tuple[tuple, tuple]):
-        label: pygame.Surface = title.render("GO!", 1, font_color)
-        description: pygame.Surface = font.render(
-            "Click the buttons to begin", 1, font_color
-        )
         window.fill(background_color)
         window.blit(
-            label,
+            GO,
             (
-                int(screen_size[0] / 2 - label.get_width() / 2),
-                int(screen_size[1] / 2 - label.get_height()),
+                int(screen_size[0] / 2 - GO.get_width() / 1.5),
+                int(screen_size[1] / 2 - GO.get_height()),
             ),
+        )
+        description: pygame.Surface = font.render(
+            "Click the buttons to begin", 1, font_color
         )
         window.blit(
             description,
